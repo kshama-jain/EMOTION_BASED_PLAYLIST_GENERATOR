@@ -9,7 +9,7 @@ def get_recommendations(entry, journey, languages, time_of_day, weather):
     def get_diary_embedding(diary_text):
         return embedding_model.encode(diary_text).tolist()
     diary_embedding = get_diary_embedding(entry)
-    client = chromadb.PersistentClient(path="./song_db4")
+    client = chromadb.PersistentClient(path="E:/Sem-6/GENAI/PROJECT/GEN-P/EMOTION_BASED_PLAYLIST_GENERATOR/backend/song_db4/song_db4")
     collection = client.get_collection("songs")
 
     recommended_songs = []
