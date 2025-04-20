@@ -4,6 +4,8 @@ import { useAuth } from "@/lib/auth-context";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
+
 export default function PlaylistPage() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,6 +24,8 @@ export default function PlaylistPage() {
     return <div className="text-white">No playlist data available.</div>;
   }
 
+
+  
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-black text-white">
       <Sidebar />
@@ -36,6 +40,7 @@ export default function PlaylistPage() {
           <button
             className="text-red-400 hover:text-red-600 text-xs border border-red-400 rounded px-3 py-1 bg-[#181818] mr-4"
             onClick={() => {
+              console.log("playlist == " , playlist)
               if (window.confirm("Are you sure you want to delete this playlist?")) {
                 axios.delete(`http://localhost:8000/playlist/${playlist.id}`, { headers: { token } })
                   .then(() => navigate('/library'));
@@ -55,7 +60,20 @@ export default function PlaylistPage() {
           {playlist.songs.map((song: any, index: number) => (
             <li key={index} className="p-4 bg-[#282828] rounded">
               <div className="font-medium">{song.song_title}</div>
-              <div className="text-sm text-gray-400">Language: {song.language}</div>
+              {/* <div className="text-sm text-gray-400">Language: {song.language}</div> */}
+              <div className="text-sm text-gray-400">Artist: {song.artist}</div>
+              {/* <div className="text-sm text-gray-400">TrackID: {song.track_id}</div> */}
+
+
+              <iframe
+                src={`https://open.spotify.com/embed/track/${song.track_id}`}
+                width="100%"
+                height="80"
+                frameBorder="0"
+                allow="encrypted-media"
+                className="rounded"
+              ></iframe>
+
             </li>
           ))}
         </ul>

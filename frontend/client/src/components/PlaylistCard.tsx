@@ -5,9 +5,15 @@ interface PlaylistCardProps {
   playlist: Playlist;
   compact?: boolean;
   showDescription?: boolean;
+  className?: string;
 }
 
-export default function PlaylistCard({ playlist, compact = false, showDescription = true }: PlaylistCardProps) {
+export default function PlaylistCard({
+  playlist,
+  compact = false,
+  showDescription = true,
+  className = "",
+}: PlaylistCardProps) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -16,27 +22,22 @@ export default function PlaylistCard({ playlist, compact = false, showDescriptio
 
   return (
     <div
-      className="playlist-card bg-[#282828] rounded-lg overflow-hidden cursor-pointer hover:bg-gray-700 transition group"
+      className={`playlist-card rounded-lg overflow-hidden cursor-pointer transition group ${className}`}
       onClick={handleClick}
     >
       <div className="p-4">
-        <div className="w-full aspect-square bg-[#121212] rounded-md mb-3 overflow-hidden">
-          <img
-            src={playlist.coverUrl}
-            alt={`${playlist.title} cover`}
-            className="w-full h-full object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
-          />
-        </div>
+        <div className={`w-full aspect-square rounded-md mb-3 ${className}`}></div>
+
         <h3 className="font-bold text-white truncate">
           {playlist.title}
         </h3>
         {!compact && showDescription && (
-          <p className="text-sm text-gray-400 line-clamp-2">
+          <p className="text-sm text-gray-300 line-clamp-2">
             {playlist.description || `${playlist.songCount} songs • ${playlist.duration}`}
           </p>
         )}
         {!compact && !showDescription && (
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-300">
             {playlist.songCount} songs • {playlist.duration}
           </p>
         )}
@@ -44,3 +45,4 @@ export default function PlaylistCard({ playlist, compact = false, showDescriptio
     </div>
   );
 }
+

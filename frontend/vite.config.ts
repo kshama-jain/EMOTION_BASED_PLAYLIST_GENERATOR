@@ -18,6 +18,9 @@ export default defineConfig({
         ]
       : []),
   ],
+  server: {
+    open: '/land', // 👈 This opens http://localhost:5173/land by default
+  },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

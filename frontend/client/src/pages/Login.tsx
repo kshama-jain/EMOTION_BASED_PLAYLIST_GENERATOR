@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/lib/auth-context";
+import { BackgroundGradientAnimation } from "../components/ui/background-gradient-animation";
+
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -33,7 +35,7 @@ export default function Login() {
     
     try {
       await login(username, password);
-      navigate("/");
+      navigate("/home");
       toast({
         title: "Welcome back!",
         description: "You have successfully logged in.",
@@ -51,8 +53,25 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
-      <Card className="w-full max-w-md mx-4 bg-[#282828] text-white border-none">
+    <div className="relative min-h-screen w-full">
+     
+
+     <div className="absolute inset-0 z-0">
+        <BackgroundGradientAnimation 
+        gradientBackgroundStart="rgb(0, 40, 33)"
+        gradientBackgroundEnd="rgb(0, 15, 4)"
+        firstColor="0, 210, 200"
+        secondColor="20, 180, 170"
+        thirdColor="0, 150, 180"
+        fourthColor="0, 120, 140"
+        fifthColor="20, 220, 200"
+        pointerColor="0, 200, 180"
+          containerClassName="pointer-events-none"
+        />
+      </div>
+
+    <div className="relative z-10 min-h-screen flex items-center justify-center">
+      <Card className="w-full max-w-md mx-4 bg-opacity-10 text-white border-none">
         <CardHeader className="pt-8 pb-4">
           <div className="flex justify-center mb-6">
             <div className="flex items-center">
@@ -117,6 +136,7 @@ export default function Login() {
           </div>
         </CardContent>
       </Card>
+    </div>
     </div>
   );
 }

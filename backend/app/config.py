@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 MYSQL_USER = "root"
-MYSQL_PASSWORD = "ramani77"
+MYSQL_PASSWORD = "hi"
 MYSQL_HOST = "localhost"
 MYSQL_DB = "emotify_db"
 

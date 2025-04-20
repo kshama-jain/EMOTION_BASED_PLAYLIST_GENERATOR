@@ -36,7 +36,7 @@ export default function Sidebar() {
           <ul>
             <li className="mb-2">
               <Link
-                to="/"
+                to="/home"
                 className={`flex items-center p-2 rounded-md hover:bg-[#282828] transition ${
                   pathname === "/" ? "text-white" : "text-gray-400"
                 }`}

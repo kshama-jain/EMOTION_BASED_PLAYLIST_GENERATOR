@@ -129,14 +129,20 @@ app.use((req, res, next) => {
   const port = 5000;
   const isWindows = os.platform() === "win32";
 
-  server.listen(
-    {
-      port,
-      host: isWindows ? "127.0.0.1" : "0.0.0.0",
-      ...(isWindows ? {} : { reusePort: true }),
-    },
-    () => {
-      log(`serving on http://localhost:${port}`);
-    }
-  );
+  // server.listen(
+  //   {
+  //     port,
+  //     host: isWindows ? "127.0.0.1" : "0.0.0.0",
+  //     ...(isWindows ? {} : { reusePort: true }),
+  //   },
+  //   () => {
+  //     log(`serving on http://localhost:${port}`);
+  //   }
+  // );
+
+
+  const host = isWindows ? "127.0.0.1" : "localhost";
+server.listen(port, host, () => {
+  log(`serving on http://${host}:${port}`);
+});
 })();

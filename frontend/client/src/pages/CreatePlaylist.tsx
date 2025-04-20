@@ -80,6 +80,8 @@ const WEATHER_OPTIONS = [
   { value: "cloudy", label: "Cloudy" },
   { value: "snowy", label: "Snowy" },
   { value: "stormy", label: "Stormy" },
+  { value: "clear", label: "Clear" },
+  { value: "foggy", label: "Foggy" },
 ];
 
 export default function CreatePlaylist() {
@@ -353,7 +355,9 @@ export default function CreatePlaylist() {
     // Only send songs and their language
     const songs = (proposedPlaylist.songs || []).map((song: any) => ({
       song_title: song.song_title,
-      language: song.language
+      language: song.language,
+      artist: song.artist,
+      track_id: song
     }));
 
     await addPlaylist({

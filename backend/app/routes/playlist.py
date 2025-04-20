@@ -6,7 +6,7 @@ from app.services.empathetic_response import generate_empathic_response
 from app.models.schema import DiaryInput, PlaylistResponse, Playlist, User
 from sqlalchemy.orm import Session
 from app.config import SessionLocal
-from jose import jwt
+from jose import jwt 
 import json
 from sqlalchemy import func
 
@@ -100,12 +100,20 @@ def get_playlist_events(db: Session = Depends(get_db), user: User = Depends(get_
 @router.get("/playlist/{playlist_id}")
 def get_playlist_by_id(playlist_id: int = Path(...), db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     playlist = db.query(Playlist).filter(Playlist.id == playlist_id, Playlist.user_id == user.id).first()
+    print("hellO!!!")
     if not playlist:
         raise HTTPException(status_code=404, detail="Playlist not found")
     try:
         playlist.songs = json.loads(playlist.songs)
+
+        print("Playlist fields:")
+        for column in Playlist.__table__.columns:
+            print(column.name)
+
+
     except Exception:
         playlist.songs = []
+        print("WHOOPSSS")
     return {
         "id": playlist.id,
         "title": playlist.title,

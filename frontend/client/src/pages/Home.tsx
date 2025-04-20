@@ -19,6 +19,13 @@ export default function Home() {
     return null;
   }
 
+  const gradientClasses = [
+    "bg-gradient-to-br from-blue-500 to-green-500",
+    "bg-gradient-to-br from-blue-500 to-green-400",
+    "bg-gradient-to-br from-purple-500 to-indigo-500",
+    "bg-gradient-to-br from-orange-500 to-yellow-400",
+  ];
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-black text-white">
       <Sidebar />
@@ -33,17 +40,17 @@ export default function Home() {
               .slice()
               .sort((a, b) => new Date(b.created_at || 0).getTime() - new Date(a.created_at || 0).getTime())
               .slice(0, 3)
-              .map((playlist) => (
+              .map((playlist,index) => (
                 <PlaylistCard 
                   key={playlist.id}
                   playlist={playlist}
                   showDescription={false}
+                  className={`${gradientClasses[index % gradientClasses.length]} hover:scale-[1.03] transition-transform duration-300`}
+
                 />
               ))}
           </div>
         </div>
-        
-        {/* Removed Trending now section */}
       </div>
     </div>
   );
